@@ -23,13 +23,23 @@ void imprimirMatriz(int **matriz, int linhas, int colunas) {
 
 
 // Função para somar duas matrizes
-void somarMatrizes(int **matriz1, int *matriz2, int **resultado, int linhas, int colunas) {
+void somarMatrizes(int **matriz1, int **matriz2, int **resultado, int linhas, int colunas) {
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
             resultado[i][j] = matriz1[i][j] + matriz2[i][j];
         }
     }
 }
+
+// Função para calcular a matriz transposta
+void calcularTransposta(int **matriz, int **transposta, int linhas, int colunas) {
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            transposta[j][i] = matriz[i][j];
+        }
+    }
+}
+
 
 int main() {
     // Inicializa o gerador de números aleatórios com base no tempo atual
@@ -60,6 +70,16 @@ int main() {
     // Chama a função para somar as matrizes
     somarMatrizes(matriz1, matriz2, resultado, linhas, colunas);
     imprimirMatriz(resultado, linhas, colunas);
+
+    // Cria uma matriz para armazenar a transposta
+    int transposta[linhas][colunas];
+
+    // Chama a função para calcular a matriz transposta
+    calcularTransposta(matriz1, transposta, linhas, colunas);
+    imprimirMatriz(transposta, linhas, colunas);
+
+
+
 
 
     return 0;
