@@ -112,7 +112,8 @@ int calcularMatrizInversa(float **matriz, float **inversa) {
 }
 
 // Função para multiplicar duas matrizes
-void multiplicarMatrizes(float **matriz1, float **matriz2, float **resultado, int linhas1, int colunas1, int colunas2) {
+void multiplicarMatrizes(float **matriz1, float **matriz2, float **resultado, int linhas1, int colunas1) {
+    int colunas2 = colunas1;
     for (int i = 0; i < linhas1; i++) {
         for (int j = 0; j < colunas2; j++) {
             resultado[i][j] = 0.0;
@@ -174,11 +175,11 @@ int main() {
     }
 
     // Chama a função para multiplicar as matrizes
-    multiplicarMatrizes(matriz1, matriz2, resultado, linhas1, colunas1, colunas2);
+    multiplicarMatrizes(matriz1, matriz2, resultado, linhas, colunas);
 
     // Imprime o resultado
     printf("\nResultado da Multiplicação:\n");
-    imprimirMatriz(resultado, linhas1, colunas2);
+    imprimirMatriz(resultado, linhas, colunas);
 
     // Libera a memória alocada para as matrizes
     liberarMatriz(matriz1, linhas);
