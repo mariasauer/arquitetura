@@ -32,7 +32,7 @@ float** alocarMatriz(int linhas, int colunas) {
 
 
 // Função para somar duas matrizes
-void somarMatrizes(float **matriz1, float **matriz2, int **resultado, int linhas, int colunas) {
+void somarMatrizes(float **matriz1, float **matriz2, float **resultado, int linhas, int colunas) {
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
             resultado[i][j] = matriz1[i][j] + matriz2[i][j];
@@ -130,8 +130,8 @@ int main() {
     srand(time(NULL));
 
     // Define o tamanho das matrizes
-    int linhas = 30000;
-    int colunas = 30000;
+    int linhas = 40000;
+    int colunas = 40000;
 
     float **matriz1 = alocarMatriz(linhas, colunas);
     float **matriz2 = alocarMatriz(linhas, colunas);
