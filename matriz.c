@@ -6,7 +6,7 @@
 void preencherMatriz(float **matriz, int linhas, int colunas) {
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
-            matriz[i][j] = rand() % 10000; 
+            matriz[i][j] = rand() % 10; 
         }
     }
 }
@@ -61,39 +61,48 @@ void liberarMatriz(float **matriz, int linhas) {
 }
 
 // Função para calcular a matriz inversa (para matrizes 3x3)
-int calcularMatrizInversa(float **matriz, float **inversa) {
+int calcularMatrizInversa(float **matriz, float **inversa, int linhas) {
     // Implementação simplificada usando eliminação de Gauss-Jordan
     // Esta implementação assume que a matriz é invertível
 
     // Copia a matriz original para a matriz inversa
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < linhas; j++) {
             inversa[i][j] = matriz[i][j];
         }
     }
 
     // Inicializa a matriz de identidade
-    float identidade[3][3] = {
-        {1, 0, 0},
-        {0, 1, 0},
-        {0, 0, 1}
-    };
+
+  float **identidade = alocarMatriz(linhas, linhas);
+
+    // Inicializando a matriz identidade
+    for (int i = 0; i <linhas; i++) {
+        for (int j = 0; j <linhas; j++) {
+            if (i == j) {
+                identidade[i][j] = 1;
+            } else {
+                identidade[i][j] = 0;
+            }
+        }
+    }
+
 
     // Aplica a eliminação de Gauss-Jordan
-    for (int k = 0; k < 3; k++) {
+    for (int k = 0; k <linhas; k++) {
         float pivo = inversa[k][k];
 
         // Divide a linha pelo pivô
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j <linhas; j++) {
             inversa[k][j] /= pivo;
             identidade[k][j] /= pivo;
         }
 
         // Reduz outras linhas
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <linhas; i++) {
             if (i != k) {
                 float fator = inversa[i][k];
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j <linhas; j++) {
                     inversa[i][j] -= fator * inversa[k][j];
                     identidade[i][j] -= fator * identidade[k][j];
                 }
@@ -102,11 +111,13 @@ int calcularMatrizInversa(float **matriz, float **inversa) {
     }
 
     // A matriz identidade agora contém a inversa
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i <linhas; i++) {
+        for (int j = 0; j <linhas; j++) {
             inversa[i][j] = identidade[i][j];
         }
     }
+
+    liberarMatriz(identidade, linhas);
 
     return 1; // Sucesso
 }
@@ -153,26 +164,32 @@ int main() {
 
     // Chama a função para somar as matrizes
     somarMatrizes(matriz1, matriz2, resultado, linhas, colunas);
+    printf("\nMatriz resultado soma:\n");
     imprimirMatriz(resultado, linhas, colunas);
 
     // Cria uma matriz para armazenar a transposta
-   float **transposta = alocarMatriz(linhas, colunas);
+    float **transposta = alocarMatriz(linhas, colunas);
 
     // Chama a função para calcular a matriz transposta
     calcularTransposta(matriz1, transposta, linhas, colunas);
+    printf("\nMatriz resultado transposta:\n");
     imprimirMatriz(transposta, linhas, colunas);
 
     // Cria uma matriz para armazenar a inversa
     float **inversa = alocarMatriz(linhas, colunas);
 
     // Chama a função para calcular a matriz inversa
-    if (calcularMatrizInversa(matriz1, inversa)) {
+    if (calcularMatrizInversa(matriz1, inversa, linhas)) {
         // Imprime a matriz inversa
         printf("\nMatriz Inversa:\n");
         imprimirMatriz(inversa, linhas, colunas);
     } else {
         printf("\nA matriz não é invertível.\n");
     }
+
+    multiplicarMatrizes(matriz1, inversa, resultado, linhas, colunas);
+    printf("\nMatriz resultado verificando:\n");
+    imprimirMatriz(resultado, linhas, colunas);
 
     // Chama a função para multiplicar as matrizes
     multiplicarMatrizes(matriz1, matriz2, resultado, linhas, colunas);
@@ -183,7 +200,9 @@ int main() {
 
     // Libera a memória alocada para as matrizes
     liberarMatriz(matriz1, linhas);
-    liberarMatriz(inversa, linhas);
+    liberarMatriz(matriz2, linhas);
+    liberarMatriz(resultado, linhas);
+    liberarMatriz(transposta, linhas);
 
 
 
