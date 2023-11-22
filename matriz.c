@@ -1,3 +1,4 @@
+// percorre a matriz de forma normal, por linhas
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -15,7 +16,7 @@ void preencherMatriz(float **matriz, int linhas, int colunas) {
 void imprimirMatriz(float **matriz, int linhas, int colunas) {
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
-            printf("%0.2f\t", matriz[i][j]);
+            printf("%0.0f\t", matriz[i][j]);
         }
         printf("\n");
     }
@@ -141,8 +142,8 @@ int main() {
     srand(time(NULL));
 
     // Define o tamanho das matrizes
-    int linhas = 40000;
-    int colunas = 40000;
+    int linhas = 20000;
+    int colunas = 20000;
 
     float **matriz1 = alocarMatriz(linhas, colunas);
     float **matriz2 = alocarMatriz(linhas, colunas);
@@ -203,9 +204,6 @@ int main() {
     liberarMatriz(matriz2, linhas);
     liberarMatriz(resultado, linhas);
     liberarMatriz(transposta, linhas);
-
-
-
-
+    
     return 0;
 }
