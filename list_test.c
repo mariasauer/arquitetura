@@ -78,8 +78,7 @@ int main() {
     int valor;
     char mode;
 
-    while (scanf("%c %d", &mode, &valor)) {
-        printf("%d\n", valor);
+    while (scanf("%c %d", &mode, &valor) != -1) {
         if (mode == 'i')
             insereOrdenado(valor, &cabeca);
         if (mode == 'r')

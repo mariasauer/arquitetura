@@ -43,7 +43,7 @@ int main() {
     char mode;
 
 
-    while (scanf("%c %d", &mode, &valor) == 1) {
+    while (scanf("%c %d", &mode, &valor) != -1) {
         if (mode == 'i')
             insere_Ordenado(valor, vetor, &tamanho);
         if (mode == 'r')

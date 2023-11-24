@@ -8,9 +8,9 @@
 
 int main(int argc, char* argv[]){
     int opt = 0;
-    long int quantidade = 1;
+    long int quantidade = 300000;
     int minimo = 0;
-    int maximo = 10;
+    int maximo = 1000;
 
 	while ((opt = getopt(argc, argv, "q:a:z:")) != -1) {
 		switch (opt) {
