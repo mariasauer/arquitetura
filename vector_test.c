@@ -1,76 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void insere(int* vec, int* size, int value){
-    
-    for (int i = 0; i < *size; i++){
-        if (vec[i] == value)
-            return;
-    }
-    printf("%d\n", *size);
-    *size = *size + 1;
-    printf("%d\n", *size);
+void insere_Ordenado(int valor, int *vetor, int *tamanho) {
+    int i, j;
 
-    int* temp = realloc(vec, *size);
-    if (!temp) {
-        perror("Error realloc");
-        free(vec);  // Liberar a memória original antes de sair
-        exit(1);
+    // Encontrar a posição correta para inserir o valor no vetor ordenado
+    for (i = 0; i < *tamanho && valor > vetor[i]; i++) {
     }
-    vec = temp;
 
-    vec[*size - 1] = value;
+    // Realocar o vetor se necessário
+    *tamanho += 1;
+    vetor = (int *)realloc(vetor, *tamanho * sizeof(int));
+
+    for (j = *tamanho - 1; j > i; j--) 
+        vetor[j] = vetor[j - 1];
+
+    vetor[i] = valor;
 }
 
+void remove_Elemento(int valor, int *vetor, int *tamanho) {
+    int i, j;
 
-void remover(int* vec, int* size, int value){
-    int to_remove = -1;
-
-    for (int i = 0; i < *size; i++){
-        if (vec[i] == value)
-            to_remove = i;
+    // Encontrar a posição do valor no vetor
+    for (i = 0; i < *tamanho && valor != vetor[i]; i++) {
     }
 
-    if (to_remove == -1)
+    if (i == *tamanho) 
         return;
-
-    memmove(&vec[to_remove], &vec[to_remove + 1], (*size - to_remove - 1) * sizeof(int));
-
-    printf("%d\n", *size);
-    *size = *size - 1;
-    printf("%d\n", *size);
-
-    if (!(vec = (int*) realloc(vec, *size))){
-        perror("Error realloc");
-        exit(1);
+    
+    for (j = i; j < *tamanho - 1; j++) {
+        vetor[j] = vetor[j + 1];
     }
+
+    *tamanho -= 1;
+    vetor = (int *)realloc(vetor, *tamanho * sizeof(int));
 }
 
-int main(){
-    int* vec;
+int main() {
+    int *vetor = NULL;
+    int tamanho = 0;
+    int valor;
     char mode;
-    int value;
-    int size = 10;
-    int iteração = 0;
-    
-    if (!(vec = (int*) malloc(sizeof(int)*10)))
-        return 1;
 
-    while(scanf(" %c %d", &mode, &value) == 2){
-        printf("%d\n", iteração);
-        switch (mode){
-        case 'i':
-            insere(vec, &size, value);            
-            break;
-        case 'r':
-            remover(vec, &size, value);
-            break;
-        default: 
-            break;
-        }
-        iteração++;
+
+    while (scanf("%c %d", &mode, &valor) == 1) {
+        if (mode == 'i')
+            insere_Ordenado(valor, vetor, &tamanho);
+        if (mode == 'r')
+            remove_Elemento(valor, vetor, &tamanho);
     }
-    free(vec);
 
+    free(vetor);
     return 0;
 }

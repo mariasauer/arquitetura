@@ -4,7 +4,7 @@ LDFLAGS =
 CC = gcc
 
 # arquivos-objeto
-	exec = entry_generator matriz vector_test
+	exec = entry_generator matriz vector_test list_test
 
 all: $(exec)
 
@@ -16,6 +16,9 @@ matriz: matriz.c
 
 vector_test: vector_test.c
 	$(CC) vector_test.c -o vector_test $(CFLAGS)
+
+list_test: list_test.c
+	$(CC) list_test.c -o list_test $(CFLAGS)
 
 clean:
 	rm -f $(exec)
