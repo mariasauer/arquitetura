@@ -1,4 +1,4 @@
-//percorre matriz normal
+// percorre primeiro colunas da matriz -> so no imprimir
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -6,7 +6,9 @@
 // Função para preencher uma matriz com números aleatórios
 void preencherMatriz(float **matriz, int linhas, int colunas) {
     for (int i = 0; i < linhas; i++) {
+
         for (int j = 0; j < colunas; j++) {
+
             matriz[i][j] = rand() % 10; 
         }
     }
@@ -14,8 +16,9 @@ void preencherMatriz(float **matriz, int linhas, int colunas) {
 
 // Função para imprimir uma matriz
 void imprimirMatriz(float **matriz, int linhas, int colunas) {
-    for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
+    for (int i = 0; i < linhas; i++) {
+
             printf("%0.0f\t", matriz[i][j]);
         }
         printf("\n");
