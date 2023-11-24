@@ -65,7 +65,7 @@ int main(){
         case 'r':
             remover(vec, &size, value);
             break;
-        default:
+        default: 
             break;
         }
         iteração++;
