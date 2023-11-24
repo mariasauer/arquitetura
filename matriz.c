@@ -142,8 +142,8 @@ int main() {
     srand(time(NULL));
 
     // Define o tamanho das matrizes
-    int linhas = 1024;
-    int colunas = 1024;
+    int linhas = 2048;
+    int colunas = 2048;
 
     float **matriz1 = alocarMatriz(linhas, colunas);
     float **matriz2 = alocarMatriz(linhas, colunas);

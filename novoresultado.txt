@@ -1,4 +1,5 @@
 --- percorre matriz normalmente
+foto 1
  > tamanho: 1024
  Elapsed Time:	14.581s
     CPU Time:	13.539s
@@ -24,7 +25,7 @@ Hardware Events
     MEM_LOAD_RETIRED.L3_MISS_PS	29,602,072	74	100007	True
 
 ---------------------------------------------------
-
+foto 2
 --- percorre matriz normalmente
  > tamanho:  2048
  Elapsed Time:	129.112s
@@ -51,7 +52,7 @@ Hardware Events
     MEM_LOAD_RETIRED.L3_MISS_PS	335,223,464	838	100007	True
 
 ---------------------------------------------------
-
+foto 3
 ----> percorre primeiro colunas, mas só no imprimir
  > tamanho:  1024
 
@@ -83,7 +84,7 @@ Hardware Events
 
 
 ---------------------------------------------------
-
+foto4
 ----> percorre primeiro colunas, mas só no imprimir
  > tamanho:  2048
  Elapsed Time:	130.458s
@@ -111,7 +112,7 @@ Hardware Events
 
 
 --------------------------------------------------
-
+foto5
 ----> percorre primeiro colunas
  > tamanho:  1024
  Elapsed Time:	12.983s
@@ -139,7 +140,7 @@ Hardware Events
 
  
 --------------------------------------------------
-
+foto6
 ----> percorre primeiro colunas
  > tamanho:  2048
 
