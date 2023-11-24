@@ -142,8 +142,8 @@ int main() {
     srand(time(NULL));
 
     // Define o tamanho das matrizes
-    int linhas = 20000;
-    int colunas = 20000;
+    int linhas = 60000;
+    int colunas = 60000;
 
     float **matriz1 = alocarMatriz(linhas, colunas);
     float **matriz2 = alocarMatriz(linhas, colunas);
@@ -188,9 +188,7 @@ int main() {
         printf("\nA matriz não é invertível.\n");
     }
 
-    multiplicarMatrizes(matriz1, inversa, resultado, linhas, colunas);
-    printf("\nMatriz resultado verificando:\n");
-    imprimirMatriz(resultado, linhas, colunas);
+
 
     // Chama a função para multiplicar as matrizes
     multiplicarMatrizes(matriz1, matriz2, resultado, linhas, colunas);
