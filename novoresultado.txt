@@ -1,5 +1,53 @@
+significados:
+
+BR_INST_RETIRED.ALL_BRANCHES_PS
+
+ALL_BRANCHES conta o número de instruções de ramificação (Evento preciso). 
+A previsão de ramificação prevê o alvo do ramo e permite que o processador comece a executar instruções muito antes do caminho de execução real do branch ser conhecido. 
+Todas as ramificações utilizam a unidade de predição de ramificação (BPU) para previsão. Esta unidade prevê o endereço de destino não apenas com base na EIP da ramificação,
+mas também com base no caminho de execução através do qual a execução atingiu este PIF. O BPU pode prever eficientemente os seguintes tipos de ramificação: ramificações
+condicionais, chamadas diretas e saltos, chamadas indiretas e saltos, retornos.
+ --->>>> número de branchs previstos
+
+
+BR_MISP_RETIRED.ALL_BRANCHES
+
+ALL_BRANCHES conta o número de instruções de ramificação mal preditas. Este umsk é um evento arquitetonicamente definido.
+Este evento conta o número de instruções de ramo aposentadas que foram preditas incorretamente pelo processador, 
+categorizadas por tipo. Uma falha de ramificação ocorre quando o processador prevê que o ramo seria tomado, mas não é, ou vice-versa. Quando a má previsão é descoberta,
+todas as instruções executadas no caminho errado (especulativa) devem ser descartadas, e o processador deve começar a buscar do caminho correto.
+---->>>> numero de vezes que errou
+
+MEM_LOAD_RETIRED.L1_HIT_PS
+
+Instruções de carga aposentadas com cache L1 atinge como fontes de dados
+
+MEM_LOAD_RETIRED.L1_MISS_PS
+
+Instruções de carga aposentadas falharam o cache L1 como fontes de dados
+
+MEM_LOAD_RETIRED.L2_HIT_PS
+
+Instruções de carga aposentadas com cache L2 atingem como fontes de dados
+
+
+MEM_LOAD_RETIRED.L3_HIT_PS
+
+Instruções de carga aposentadas com cache L3 atinge como fontes de dados
+
+MEM_LOAD_RETIRED.L3_MISS_PS
+
+Instruções de carga aposentadas perdidas do cache L3 como fontes de dados
+
+----------------------------------------------------------------------------------------
+todos os testes foram executados na mesma máquina,
+configurações da CPU -> print: informacoesPc.png
+
+
+---------------------------------------------------------------------------
+
 --- percorre matriz normalmente
-foto 1
+print: foto 1
  > tamanho: 1024
  Elapsed Time:	14.581s
     CPU Time:	13.539s
@@ -11,21 +59,16 @@ Hardware Events
     BR_INST_RETIRED.ALL_BRANCHES	4,454,500,224	2,784	400009	False
     BR_MISP_RETIRED.ALL_BRANCHES	17,600,396	11	400009	False
     BR_MISP_RETIRED.ALL_BRANCHES_PS	16,000,360	10	400009	True
-    CPU_CLK_UNHALTED.REF_TSC	46,140,069,210	23,070	2000003	False
     MEM_INST_RETIRED.ALL_STORES_PS	7,816,011,724	977	2000003	True
     MEM_INST_RETIRED.ANY	75,168,112,752	9,396	2000003	False
-    MEM_LOAD_L3_HIT_RETIRED.XSNP_HITM_PS	0	0	20011	True
-    MEM_LOAD_L3_HIT_RETIRED.XSNP_HIT_PS	0	0	20011	True
-    MEM_LOAD_L3_HIT_RETIRED.XSNP_MISS_PS	0	0	20011	True
-    MEM_LOAD_RETIRED.FB_HIT_PS	22,400,672	56	100003	True
-    MEM_LOAD_RETIRED.L1_HIT_PS	68,512,102,768	8,564	2000003	True
-    MEM_LOAD_RETIRED.L1_MISS_PS	1,248,437,452	3,121	100003	True
-    MEM_LOAD_RETIRED.L2_HIT_PS	1,145,634,368	2,864	100003	True
-    MEM_LOAD_RETIRED.L3_HIT_PS	71,429,988	357	50021	True
-    MEM_LOAD_RETIRED.L3_MISS_PS	29,602,072	74	100007	True
-
+    MEM_LOAD_RETIRED.L1_HIT_PS	68,512,102,768	8,564	2000003	True (leu da l1)
+    MEM_LOAD_RETIRED.L1_MISS_PS	1,248,437,452	3,121	100003	True (nao conseguiu ler da l1)
+    MEM_LOAD_RETIRED.L2_HIT_PS	1,145,634,368	2,864	100003	True (leu da l2)
+    MEM_LOAD_RETIRED.L3_HIT_PS	71,429,988	357	50021	True (leu da l3)
+    MEM_LOAD_RETIRED.L3_MISS_PS	29,602,072	74	100007	True (nao conseguiu ler da l3)
+ 
 ---------------------------------------------------
-foto 2
+print: foto 2
 --- percorre matriz normalmente
  > tamanho:  2048
  Elapsed Time:	129.112s
@@ -52,7 +95,7 @@ Hardware Events
     MEM_LOAD_RETIRED.L3_MISS_PS	335,223,464	838	100007	True
 
 ---------------------------------------------------
-foto 3
+print: foto 3
 ----> percorre primeiro colunas, mas só no imprimir
  > tamanho:  1024
 
@@ -84,7 +127,7 @@ Hardware Events
 
 
 ---------------------------------------------------
-foto4
+print: foto4
 ----> percorre primeiro colunas, mas só no imprimir
  > tamanho:  2048
  Elapsed Time:	130.458s
@@ -112,7 +155,7 @@ Hardware Events
 
 
 --------------------------------------------------
-foto5
+print: foto5
 ----> percorre primeiro colunas
  > tamanho:  1024
  Elapsed Time:	12.983s
@@ -140,7 +183,7 @@ Hardware Events
 
  
 --------------------------------------------------
-foto6
+print: foto6
 ----> percorre primeiro colunas
  > tamanho:  2048
 
@@ -168,3 +211,90 @@ Hardware Events
     MEM_LOAD_RETIRED.L3_HIT_PS	2,589,687,212	12,943	50021	True
     MEM_LOAD_RETIRED.L3_MISS_PS	44,803,136	112	100007	True
 
+------------------------------------------------
+print: foto7
+
+gerador de valores:
+quantidade: 300.000
+amplitude dos valores: 1000
+
+Elapsed Time:	0.052s
+    CPU Time:	0.045s
+    Total Thread Count:	2
+    Paused Time:	0s
+
+Hardware Events
+    Hardware Event Type	Hardware Event Count	Hardware Event Sample Count	Events Per Sample	Precise
+    BR_INST_RETIRED.ALL_BRANCHES	91,202,052	57	400009	False
+    BR_MISP_RETIRED.ALL_BRANCHES	0	0	400009	False
+    BR_MISP_RETIRED.ALL_BRANCHES_PS	0	0	400009	True
+    CPU_CLK_UNHALTED.REF_TSC	154,000,231	77	2000003	False
+    MEM_INST_RETIRED.ALL_STORES_PS	40,000,060	5	2000003	True
+    MEM_INST_RETIRED.ANY	80,000,120	10	2000003	False
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_HITM_PS	0	0	20011	True
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_HIT_PS	0	0	20011	True
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_MISS_PS	0	0	20011	True
+    MEM_LOAD_RETIRED.FB_HIT_PS	0	0	100003	True
+    MEM_LOAD_RETIRED.L1_HIT_PS	80,000,120	10	2000003	True
+    MEM_LOAD_RETIRED.L1_MISS_PS	0	0	100003	True
+    MEM_LOAD_RETIRED.L2_HIT_PS	0	0	100003	True
+    MEM_LOAD_RETIRED.L3_HIT_PS	0	0	50021	True
+    MEM_LOAD_RETIRED.L3_MISS_PS	0	0	100007	True
+
+--------------------------------------------------
+print: foto 8
+GERANDO LISTA : codigo remove e insere valores
+quantidade de entrada: 300.000
+amplitude dos valores: 1000
+
+Elapsed Time:	351.159s
+    CPU Time:	334.221s
+    Total Thread Count:	2
+    Paused Time:	0s
+
+Hardware Events
+    Hardware Event Type	Hardware Event Count	Hardware Event Sample Count	Events Per Sample	Precise
+    BR_INST_RETIRED.ALL_BRANCHES	41,703,338,304	26,064	400009	False
+    BR_MISP_RETIRED.ALL_BRANCHES	6,400,144	4	400009	False
+    BR_MISP_RETIRED.ALL_BRANCHES_PS	16,000,360	10	400009	True
+    CPU_CLK_UNHALTED.REF_TSC	1,139,025,708,536	569,512	2000003	False
+    MEM_INST_RETIRED.ALL_STORES_PS	23,256,034,884	2,907	2000003	True
+    MEM_INST_RETIRED.ANY	187,296,280,944	23,412	2000003	False
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_HITM_PS	0	0	20011	True
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_HIT_PS	80,044	1	20011	True
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_MISS_PS	0	0	20011	True
+    MEM_LOAD_RETIRED.FB_HIT_PS	57,392,121,712	143,476	100003	True
+    MEM_LOAD_RETIRED.L1_HIT_PS	85,432,128,148	10,679	2000003	True
+    MEM_LOAD_RETIRED.L1_MISS_PS	20,558,616,740	51,395	100003	True
+    MEM_LOAD_RETIRED.L2_HIT_PS	922,427,672	2,306	100003	True
+    MEM_LOAD_RETIRED.L3_HIT_PS	17,903,116,152	89,478	50021	True
+    MEM_LOAD_RETIRED.L3_MISS_PS	1,756,922,976	4,392	100007	True
+
+-------------------------------------------------
+print: foto 9
+GERANDO VETOR: remove e insere valores do VETOR
+quantidade de entrada: 300.000
+amplitude dos valores: 1000
+
+Elapsed Time:	0.103s
+    CPU Time:	0.001s
+    Total Thread Count:	2
+    Paused Time:	0s
+
+Hardware Events
+    Hardware Event Type	Hardware Event Count	Hardware Event Sample Count	Events Per Sample	Precise
+    BR_INST_RETIRED.ALL_BRANCHES	0	0	400009	False
+    BR_MISP_RETIRED.ALL_BRANCHES	0	0	400009	False
+    BR_MISP_RETIRED.ALL_BRANCHES_PS	0	0	400009	True
+    CPU_CLK_UNHALTED.REF_TSC	2,000,003	1	2000003	False
+    MEM_INST_RETIRED.ALL_STORES_PS	0	0	2000003	True
+    MEM_INST_RETIRED.ANY	0	0	2000003	False
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_HITM_PS	0	0	20011	True
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_HIT_PS	0	0	20011	True
+    MEM_LOAD_L3_HIT_RETIRED.XSNP_MISS_PS	0	0	20011	True
+    MEM_LOAD_RETIRED.FB_HIT_PS	0	0	100003	True
+    MEM_LOAD_RETIRED.L1_HIT_PS	0	0	2000003	True
+    MEM_LOAD_RETIRED.L1_MISS_PS	0	0	100003	True
+    MEM_LOAD_RETIRED.L2_HIT_PS	0	0	100003	True
+    MEM_LOAD_RETIRED.L3_HIT_PS	0	0	50021	True
+    MEM_LOAD_RETIRED.L3_MISS_PS	0	0	100007	True

@@ -1,4 +1,4 @@
-// percorre primeiro colunas da matriz
+// percorre primeiro colunas da matriz e depois linhas
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
