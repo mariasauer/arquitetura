@@ -11,3 +11,20 @@ echo 0 | sudo tee /proc/sys/kernel/perf_event_paranoid
 source ./setvars.sh
 
 vtune-gui .
+
+_________________________________________________________________________________________________________
+
+Modo de gerar uma entrada com entry_generator
+
+> ./entry_generator -q _QUANTIDADE_ -a _MÍNIMO_ -z _MÁXIMO_
+
+entry generator gera o arquivo entry.txt para ser usado em vector_test e list_test
+
+===========
+
+Modo de realizar um teste tanto para vector_test, quanto list_test
+
+> ./executável < entry.txt
+
+_________________________________________________________________________________________________________
+
